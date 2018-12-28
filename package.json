@@ -1,0 +1,27 @@
+{
+  "name": "lua2yml",
+  "version": "0.1.0",
+  "description": "lua",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "dependencies": {
+    "luaparse": "^0.2.1",
+    "rd": "^2.0.1",
+    "jsonminify": "^0.4.1",
+    "tslib": "^1.9.3",
+    "ejs": "^2.6.1"
+  },
+  "author": "kakacoding",
+  "devDependencies": {
+    "@types/node": "^10.10.0",
+    "@types/luaparse": "^0.0.29",
+    "@types/jsonminify": "^0.4.0",
+    "@types/ejs": "^2.6.0",
+    "typescript": "^3.1.6"
+  }
+}

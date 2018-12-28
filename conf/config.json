@@ -1,0 +1,83 @@
+//此json为非标，需使用jsonminify.minify后再使用
+{
+    //全局类名字
+    "defaultClassName": "_G",
+    "defaultClassComment": "全局表，包含所有全局变量和函数",
+    //todo:导出local函数或变量
+    "displayLocal": false,
+    //导出非public函数
+    "displayNoPublic": false,
+    //yml输出目录
+    "ymloutdir": "../docfx_project/lua-dmm/",
+    //需要被分析的lua文件
+    "luafiles":{
+        "include":[
+            "../../3364480850e65ad6/lua-proj",
+            "./lua-test"
+        ],
+        "exclude":[
+        ]
+    },
+    "regexp": {
+        //注释的正则表达式
+        "comments": {
+            "class": {
+                "regexp": "---@class ([a-zA-Z][0-9a-zA-Z_-]*)\\s*(?::\\s*([a-zA-Z][0-9a-zA-Z_-]*))?\\s*(?:@(.*))?",
+                "elems": [
+                    "name",
+                    "base",
+                    "comment"
+                ]
+            },
+            "field": {
+                "regexp": "---@field\\s*(public|private|protected)?\\s*([a-zA-Z][0-9a-zA-Z_-]*)\\s*([a-zA-Z][0-9a-zA-Z_-]*)\\s*(?:@(.*))?",
+                "elems": [
+                    "access",
+                    "name",
+                    "type",
+                    "comment"
+                ]
+            },
+            "param": {
+                "regexp": "---@param\\s*([a-zA-Z][0-9a-zA-Z_-]*)\\s*([a-zA-Z][0-9a-zA-Z_-]*)\\s*(?:@(.*))?",
+                "elems": [
+                    "name",
+                    "type",
+                    "comment"
+                ]
+            },
+            "return": {
+                "regexp": "---@return\\s*((?:[a-zA-Z][0-9a-zA-Z_-]*)?(?:\\s*\\|\\s*[a-zA-Z][0-9a-zA-Z_-]*)*)\\s*(?:@(.*))?",
+                "elems": [
+                    "type",
+                    "comment"
+                ]
+            },
+            "access": {
+                "regexp": "---@(public|private|protected)",
+                "elems": [
+                    "access"
+                ]
+            },
+            "comment": {
+                "regexp": "---(?:-*)\\s*(.*)",
+                "elems": [
+                    "comment"
+                ]
+            }
+        }
+        // //代码的正则表达式
+        // ,"code":{
+        //     "AssignmentStatement":{
+        //         "class":{
+        //             "elems":[
+        //             ]
+        //         },
+        //         "field":{
+        //         }
+        //     },
+        //     "FunctionDeclaration":{
+        //     }
+        // }
+    }
+}

@@ -1,0 +1,81 @@
+### YamlMime:ManagedReference
+<%_ let Prefix = data.isDefaultClass ? "" : `${data.classData.name}`; _%>
+<%_ let classType = data.isDefaultClass ? "Struct" : "Class"; _%>
+<%_ let declaration = data.classData.base == "" ? `${data.classData.name} = class("${data.classData.name}")` : `${data.classData.name} = class("${data.classData.name}", ${data.classData.base})`; _%>
+items:
+- uid: <%- data.classData.name %>
+  fullName: <%- data.classData.name %>
+  commentId: T:<%- data.classData.name %>
+  id: <%- data.classData.name %>
+  name: <%- data.classData.name %>
+  nameWithType: <%- data.classData.name %>
+  parent: 
+  type: <%- classType %>
+  children:
+<%_ for(let field of data.classData.fields){ _%>
+  - <%- Prefix %><%- field.name %>
+<%_ } _%>
+<%_ for(let func of data.classData.funcs){ _%>
+  <%_ if(data.displayNoPublic || func.access == 0){ _%>
+  - <%- func.ymlDeclaration %>
+  <%_ } _%>
+<%_ } _%>
+  summary: "<%= data.classData.comment %>"
+<%_ if(!data.isDefaultClass){ _%>
+  syntax:
+    content: <%- declaration %>
+<%_ } _%>
+<%_ if(data.classData.base != ""){ _%>
+  inheritance:
+  - <%- data.classData.base %>
+<%_ } _%>  
+<%_ for(let field of data.classData.fields){ _%>
+- uid: <%- Prefix %><%- field.name %>
+  fullName: <%- Prefix %><%- field.name %>
+  commentId: F:<%- Prefix %><%- field.name %>
+  id: <%- field.name %>
+  name: <%- field.name %>
+  nameWithType: <%- Prefix %><%- field.name %>
+  parent: <%- data.classData.name %>
+  type: Field
+  summary: "<%= field.comment %>"
+  description: "<%= field.comment %>"
+  syntax:
+    content: self.<%- field.name %>
+    return:
+      type: <%- field.type %>
+<%_ } _%>
+<%_ for(let func of data.classData.funcs){ _%>
+- uid: <%- func.ymlDeclaration %>
+  fullName: <%- func.ymlDeclaration %>
+  commentId: M:<%- func.ymlDeclaration %>
+  id: <%- func.ymlDeclaration.replace(data.classData.name+func.indexer, "") %>
+  name: <%- func.ymlDeclaration.replace(data.classData.name+func.indexer, "") %>
+  nameWithType: <%- func.ymlDeclaration %>
+  parent: <%- data.classData.name %>
+  type: Method
+  summary: "<%= func.comment %>"
+  syntax:
+    content: function <%- func.ymlDeclaration %>
+    parameters:
+  <%_ for(let param of func.params){ _%>
+    - id: <%- param.name %>
+      type: <%- param.type %>
+      description: "<%= param.comment %>"
+  <%_ } _%>
+    return:
+  <%_ for(let ret of func.rets){ _%>
+      type: <%- ret.type %>
+      description: "<%= ret.comment %>"
+  <%_ } _%>
+<%_ } _%>
+<%_ if(data.classData.references.length > 0){ _%>
+references:
+<%_ } _%>
+<%_ for(let reference of data.classData.references){ _%>
+  <%_ if(reference != "number" && reference != "string" && reference != "table"){ _%>
+- uid: <%- reference %>  
+  <%_ }else{ _%>
+- uid: <%- reference %>  
+  <%_ } _%>
+<%_ } _%>
