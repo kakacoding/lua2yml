@@ -8,11 +8,10 @@
     //导出非public函数
     "displayNoPublic": false,
     //yml输出目录
-    "ymloutdir": "../docfx_project/lua-dmm/",
+    "ymloutdir": "../docfx_project/luadoc/",
     //需要被分析的lua文件
     "luafiles":{
         "include":[
-            "../../3364480850e65ad6/lua-proj",
             "./lua-test"
         ],
         "exclude":[
